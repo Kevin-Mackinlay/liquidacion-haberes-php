@@ -24,4 +24,8 @@ class Database
 
         return self::$conexion;
     }
+      public static function getConnection(): PDO
+    {
+        return self::getConexion();
+    }
 }

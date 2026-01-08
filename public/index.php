@@ -16,6 +16,16 @@ switch ($route) {
         $controller->index();
         break;
 
+    case 'employees/create':
+        $controller = new EmployeeController();
+        $controller->create();
+        break;
+
+    case 'employees/store':
+        $controller = new EmployeeController();
+        $controller->store();
+        break;
+
     default:
         http_response_code(404);
         echo "Ruta no encontrada.";
