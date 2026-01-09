@@ -26,6 +26,7 @@
           <th>Nombre</th>
           <th>Fecha ingreso</th>
           <th>Título</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -37,6 +38,10 @@
             <td><?= htmlspecialchars($e['nombre']) ?></td>
             <td><?= htmlspecialchars($e['fecha_ingreso']) ?></td>
             <td><?= $e['tiene_titulo'] ? 'Sí' : 'No' ?></td>
+            <td>
+              <a href="/?r=employees/edit&id=<?= $e['id'] ?>">Editar</a>
+              <a href="/?r=employees/delete&id=<?= $e['id'] ?>">Eliminar</a>
+            </td>
           </tr>
         <?php endforeach; ?>
       </tbody>
