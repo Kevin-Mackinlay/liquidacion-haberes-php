@@ -162,5 +162,35 @@ public function update()
     exit;
 }
 
+public function destroy()
+{
+    // 1) Asegurar POST
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        http_response_code(405);
+        echo "Método no permitido.";
+        return;
+    }
+
+    // 2) Tomar ID desde la URL
+    $id = (int)($_GET['id'] ?? 0);
+    if ($id <= 0) {
+        http_response_code(400);
+        echo "ID inválido.";
+        return;
+    }
+
+    // 3) Conectar a DB
+    $pdo = Database::getConexion();
+
+    // 4) DELETE
+    $stmt = $pdo->prepare("DELETE FROM empleados WHERE id = :id");
+    $stmt->execute([':id' => $id]);
+
+    // 5) Volver al listado
+    header("Location: /?r=employees");
+    exit;
+}
+
+
 
 }

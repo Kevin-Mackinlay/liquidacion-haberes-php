@@ -36,6 +36,12 @@ switch ($route) {
     $controller->update();
     break;
 
+    case 'employees/destroy':
+    $controller = new EmployeeController();
+    $controller->destroy();
+    break;
+
+
     
 
     default:

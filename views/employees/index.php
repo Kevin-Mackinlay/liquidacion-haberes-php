@@ -39,9 +39,15 @@
             <td><?= htmlspecialchars($e['fecha_ingreso']) ?></td>
             <td><?= $e['tiene_titulo'] ? 'Sí' : 'No' ?></td>
             <td>
-              <a href="/?r=employees/edit&id=<?= $e['id'] ?>">Editar</a>
-              <a href="/?r=employees/delete&id=<?= $e['id'] ?>">Eliminar</a>
-            </td>
+  <a href="/?r=employees/edit&id=<?= (int)$e['id'] ?>">Editar</a>
+
+  <form method="POST" action="/?r=employees/destroy&id=<?= (int)$e['id'] ?>" style="display:inline;">
+    <button type="submit" onclick="return confirm('¿Seguro que querés eliminar este empleado?');">
+      Eliminar
+    </button>
+  </form>
+</td>
+
           </tr>
         <?php endforeach; ?>
       </tbody>
