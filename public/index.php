@@ -1,4 +1,21 @@
 <?php
+
+session_start();
+
+function setFlash(string $type, string $message): void
+{
+    $_SESSION['flash'] = ['type' => $type, 'message' => $message];
+}
+
+function getFlash(): ?array
+{
+    if (!isset($_SESSION['flash'])) return null;
+    $flash = $_SESSION['flash'];
+    unset($_SESSION['flash']);
+    return $flash;
+}
+
+
 // 1) Mientras desarrollás: mostrás errores (te ayuda a no quedar en blanco)
 error_reporting(E_ALL);
 ini_set('display_errors', '1');

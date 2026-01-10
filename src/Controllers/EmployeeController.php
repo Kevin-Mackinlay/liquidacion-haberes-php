@@ -67,6 +67,7 @@ class EmployeeController
         ]);
 
         // 6) Redirigir al listado (Post/Redirect/Get)
+        setFlash('OK', 'Empleado creado correctamente');
         header("Location: /?r=employees");
         exit;
     }
@@ -187,6 +188,7 @@ public function destroy()
     $stmt->execute([':id' => $id]);
 
     // 5) Volver al listado
+    setFlash('OK', 'Empleado eliminado correctamente');
     header("Location: /?r=employees");
     exit;
 }

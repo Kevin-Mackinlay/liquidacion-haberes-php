@@ -12,6 +12,15 @@
 </head>
 <body>
 
+<?php $flash = getFlash(); ?>
+<?php if ($flash): ?>
+  <div style="padding:10px; margin:10px 0; border:1px solid #ccc;">
+    <strong><?= htmlspecialchars($flash['type']) ?>:</strong>
+    <?= htmlspecialchars($flash['message']) ?>
+  </div>
+<?php endif; ?>
+
+
   <h1>Listado de Empleados</h1>
 
   <?php if (empty($empleados)): ?>
