@@ -9,12 +9,23 @@ class EmployeeController
         // 1) Nos conectamos a la DB
         $pdo = Database::getConexion();
 
-        // 2) Pedimos todos los empleados
-        $stmt = $pdo->query("
-            SELECT id, cuil, apellido, nombre, fecha_ingreso, tiene_titulo
-            FROM empleados
-            ORDER BY apellido, nombre
-        ");
+    $stmt = $pdo->query("
+    SELECT 
+        e.id,
+        e.cuil,
+        e.apellido,
+        e.nombre,
+        e.fecha_ingreso,
+        e.tiene_titulo,
+        e.cargo_id,
+        c.nombre AS cargo_nombre,
+        eo.nombre AS estructura_nombre
+    FROM empleados e
+    LEFT JOIN cargos c ON c.id = e.cargo_id
+    LEFT JOIN estructuras_organizativas eo ON eo.id = c.estructura_organizativa_id
+    ORDER BY e.apellido, e.nombre
+");
+
 
         $empleados = $stmt->fetchAll();
 

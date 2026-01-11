@@ -20,48 +20,61 @@
   </div>
 <?php endif; ?>
 
+<h1>Listado de Empleados</h1>
 
-  <h1>Listado de Empleados</h1>
+<?php if (empty($empleados)): ?>
+  <p>No hay empleados cargados.</p>
+<?php else: ?>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>CUIL</th>
+        <th>Apellido</th>
+        <th>Nombre</th>
+        <th>Fecha ingreso</th>
+        <th>Título</th>
+        <th>Cargo</th>
+        <th>Estructura</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
 
-  <?php if (empty($empleados)): ?>
-    <p>No hay empleados cargados.</p>
-  <?php else: ?>
-    <table>
-      <thead>
+    <tbody>
+      <?php foreach ($empleados as $e): ?>
         <tr>
-          <th>ID</th>
-          <th>CUIL</th>
-          <th>Apellido</th>
-          <th>Nombre</th>
-          <th>Fecha ingreso</th>
-          <th>Título</th>
-          <th>Acciones</th>
+          <td><?= htmlspecialchars($e['id']) ?></td>
+          <td><?= htmlspecialchars($e['cuil']) ?></td>
+          <td><?= htmlspecialchars($e['apellido']) ?></td>
+          <td><?= htmlspecialchars($e['nombre']) ?></td>
+          <td><?= htmlspecialchars($e['fecha_ingreso']) ?></td>
+          <td><?= $e['tiene_titulo'] ? 'Sí' : 'No' ?></td>
+
+         <!-- CARGO -->
+<td><?= htmlspecialchars($e['cargo_nombre'] ?? '(sin cargo)') ?></td>
+
+<!-- ESTRUCTURA -->
+<td><?= htmlspecialchars($e['estructura_nombre'] ?? '(sin estructura)') ?></td>
+
+
+          <!-- ACCIONES -->
+          <td>
+            <a href="/?r=employees/edit&id=<?= (int)$e['id'] ?>">Editar</a>
+
+            <form method="POST"
+                  action="/?r=employees/destroy&id=<?= (int)$e['id'] ?>"
+                  style="display:inline;">
+              <button type="submit"
+                      onclick="return confirm('¿Seguro que querés eliminar este empleado?');">
+                Eliminar
+              </button>
+            </form>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        <?php foreach ($empleados as $e): ?>
-          <tr>
-            <td><?= htmlspecialchars($e['id']) ?></td>
-            <td><?= htmlspecialchars($e['cuil']) ?></td>
-            <td><?= htmlspecialchars($e['apellido']) ?></td>
-            <td><?= htmlspecialchars($e['nombre']) ?></td>
-            <td><?= htmlspecialchars($e['fecha_ingreso']) ?></td>
-            <td><?= $e['tiene_titulo'] ? 'Sí' : 'No' ?></td>
-            <td>
-  <a href="/?r=employees/edit&id=<?= (int)$e['id'] ?>">Editar</a>
-
-  <form method="POST" action="/?r=employees/destroy&id=<?= (int)$e['id'] ?>" style="display:inline;">
-    <button type="submit" onclick="return confirm('¿Seguro que querés eliminar este empleado?');">
-      Eliminar
-    </button>
-  </form>
-</td>
-
-          </tr>
-        <?php endforeach; ?>
-      </tbody>
-    </table>
-  <?php endif; ?>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+<?php endif; ?>
 
 </body>
 </html>
