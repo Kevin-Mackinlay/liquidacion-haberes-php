@@ -1,9 +1,11 @@
 <!doctype html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <title>Nuevo empleado</title>
 </head>
+
 <body>
 
   <h1>Alta de Empleado</h1>
@@ -30,6 +32,19 @@
     </div>
 
     <div>
+      <label>Cargo</label><br>
+      <select name="cargo_id" required>
+        <option value="">-- Seleccionar cargo --</option>
+        <?php foreach ($cargos as $c): ?>
+          <option value="<?= (int)$c['id'] ?>">
+            <?= htmlspecialchars($c['nombre']) ?>
+          </option>
+        <?php endforeach; ?>
+      </select>
+    </div>
+
+
+    <div>
       <label>Título</label>
       <input type="checkbox" name="tiene_titulo" value="1">
     </div>
@@ -41,4 +56,5 @@
   <p><a href="/?r=employees">Volver al listado</a></p>
 
 </body>
+
 </html>
