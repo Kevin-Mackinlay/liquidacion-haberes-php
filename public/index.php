@@ -25,6 +25,8 @@ $route = $_GET['r'] ?? 'employees'; // si no viene nada, por defecto employees
 
 // 3) Cargamos el controlador (archivo PHP)
 require_once __DIR__ . '/../src/Controllers/EmployeeController.php';
+require_once __DIR__ . '/../src/Controllers/DesignationController.php';
+
 
 // 4) Enrutamiento mínimo (router casero)
 switch ($route) {
@@ -58,8 +60,20 @@ switch ($route) {
     $controller->destroy();
     break;
 
+    case 'designations':
+        (new DesignationController())->index();
+        break;
 
-    
+    case 'designations/create':
+        (new DesignationController())->create();
+        break;
+
+    case 'designations/store':
+        (new DesignationController())->store();
+        break;
+
+
+
 
     default:
         http_response_code(404);
