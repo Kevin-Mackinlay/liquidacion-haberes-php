@@ -72,7 +72,9 @@ switch ($route) {
         (new DesignationController())->store();
         break;
 
-
+    case 'recibo':
+        require __DIR__ . '/recibo.php';
+        break;
 
 
     default:
